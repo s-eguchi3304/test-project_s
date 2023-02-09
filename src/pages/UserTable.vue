@@ -48,7 +48,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      message: 'Search/Filter In Table',
+      message: 'JSONデータ取得して一覧に表示',
       users: [],
       search: '',
     };
