@@ -1,9 +1,7 @@
-<script setup>
-import table_test from './components/table_test.vue';
-</script>
+<script setup></script>
 
 <template>
-  <table_test />
+  <main class="main"><router-view /></main>
 </template>
 
 <style scoped>
