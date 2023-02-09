@@ -29,7 +29,7 @@
           </td>
           <td>{{ user.phone }}</td>
           <td>
-            <a v-bind:href="`${user.website}`">{{ user.website }}</a>
+            <a :href="`https://${user.website}`">{{ user.website }}</a>
           </td>
           <td>
             {{ user.company.name }}<br />
