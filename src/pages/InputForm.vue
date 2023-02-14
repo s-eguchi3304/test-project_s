@@ -52,6 +52,8 @@ const submitForm = async () => {
                   type="text"
                   id="text"
                   v-model="formData.text"
+                  @blur="v$.text.$touch()"
+                  :class="{ error: v$.text.$error, 'form-control': true }"
                 />
                 <div v-for="error of v$.text.$errors" :key="error.$uid">
                   <div class="text-danger fw-bold">{{ error.$message }}</div>
@@ -227,3 +229,11 @@ const submitForm = async () => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.error {
+  color: #8a0421;
+  border-color: #dd0f3b;
+  background-color: #ffd9d9;
+}
+</style>
