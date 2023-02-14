@@ -4,7 +4,7 @@ import { useVuelidate } from '@vuelidate/core';
 //import { required, email } from '@vuelidate/validators';
 import { required, email } from '../utils/i18n-validators.js';
 
-const title = ref('テストフォーム');
+const title = ref('テスト　　　フォーム');
 
 const formData = reactive({
   text: '',
@@ -41,7 +41,7 @@ const submitForm = async () => {
   <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
       <div class="col-md-8">
-        <div class="row border">
+        <div class="row border rounded">
           <div class="col-md">
             <h2 class="mt-3 mb-3">{{ title }}</h2>
             <form @submit.prevent="submitForm">
