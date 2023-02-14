@@ -4,7 +4,7 @@ import { useVuelidate } from '@vuelidate/core';
 //import { required, email } from '@vuelidate/validators';
 import { required, email } from '../utils/i18n-validators.js';
 
-const title = ref('テスト　　　フォーム');
+const title = ref('テストフォーム');
 
 const formData = reactive({
   text: '',
