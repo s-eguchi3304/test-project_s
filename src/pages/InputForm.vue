@@ -1,8 +1,10 @@
 <script setup>
 import { ref, reactive } from 'vue';
 import { useVuelidate } from '@vuelidate/core';
-//import { required, email } from '@vuelidate/validators';
+import { useRouter } from 'vue-router';
 import { required, email } from '../utils/i18n-validators.js';
+
+const router = useRouter();
 
 const title = ref('テストフォーム');
 
@@ -30,10 +32,16 @@ const rules = {
 
 const v$ = useVuelidate(rules, formData);
 
-const submitForm = async () => {
-  console.log('submit', formData);
+const submitForm = () => {
   v$.value.$validate();
-  console.log('$errors', v$.value.$errors);
+  if (v$.value.$invalid) {
+    console.log('バリデーションエラー発生');
+    console.log('$errors', v$.value.$errors);
+  } else {
+    console.log('バリデーションパス、リクエスト送信');
+    console.log('submit', formData);
+    router.replace('/thanks');
+  }
 };
 </script>
 
@@ -48,7 +56,6 @@ const submitForm = async () => {
               <div class="form-group mb-3">
                 <label>フォームテキスト</label>
                 <input
-                  class="form-control"
                   type="text"
                   id="text"
                   v-model="formData.text"
@@ -63,10 +70,11 @@ const submitForm = async () => {
               <div class="form-group mb-3">
                 <label>テキストエリア</label>
                 <textarea
-                  class="form-control"
                   rows="3"
                   v-model="formData.textArea"
                   id="textarea"
+                  @blur="v$.textArea.$touch()"
+                  :class="{ error: v$.textArea.$error, 'form-control': true }"
                 ></textarea>
                 <div v-for="error of v$.textArea.$errors" :key="error.$uid">
                   <div class="text-danger fw-bold">{{ error.$message }}</div>
@@ -149,7 +157,11 @@ const submitForm = async () => {
 
               <div class="form-group mb-3">
                 <label>セレクトボックス</label>
-                <select class="form-select" v-model="formData.select">
+                <select
+                  v-model="formData.select"
+                  @blur="v$.select.$touch()"
+                  :class="{ error: v$.select.$error, 'form-select': true }"
+                >
                   <option disabled value="">選択</option>
                   <option>値1</option>
                   <option>値2</option>
@@ -168,6 +180,8 @@ const submitForm = async () => {
                   multiple
                   size="3"
                   id="multiSelect"
+                  @blur="v$.selects.$touch()"
+                  :class="{ error: v$.selects.$error, 'form-select': true }"
                 >
                   <option>値1</option>
                   <option>値2</option>
@@ -187,9 +201,10 @@ const submitForm = async () => {
                   id="tel"
                   size="15"
                   maxlength="15"
-                  class="form-control"
                   placeholder="XXX-XXXX-XXXX"
                   v-model="formData.tel"
+                  @blur="v$.tel.$touch()"
+                  :class="{ error: v$.tel.$error, 'form-control': true }"
                 />
                 <div v-for="error of v$.tel.$errors" :key="error.$uid">
                   <div class="text-danger fw-bold">{{ error.$message }}</div>
@@ -203,9 +218,10 @@ const submitForm = async () => {
                   id="email"
                   size="30"
                   maxlength="50"
-                  class="form-control"
                   placeholder="@example.com"
                   v-model="formData.email"
+                  @blur="v$.email.$touch()"
+                  :class="{ error: v$.email.$error, 'form-control': true }"
                 />
                 <div v-for="error of v$.email.$errors" :key="error.$uid">
                   <div class="text-danger fw-bold">{{ error.$message }}</div>
@@ -214,12 +230,7 @@ const submitForm = async () => {
 
               <div class="row justify-content-center text-center mb-3">
                 <div class="col-md-4">
-                  <button
-                    type="submit"
-                    class="btn btn-outline-primary btn-block"
-                  >
-                    送信
-                  </button>
+                  <button type="submit" class="btn btn-primary">送信</button>
                 </div>
               </div>
             </form>
