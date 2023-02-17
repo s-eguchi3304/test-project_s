@@ -3,6 +3,8 @@ import index from '/src/pages/index.vue';
 import UserTable from '/src/pages/UserTable.vue';
 import InputForm from '/src/pages/InputForm.vue';
 import thanks from '/src/pages/thanks.vue';
+/*import Login from '/src/pages/login.vue';
+import Register from '/src/pages/register.vue';*/
 
 const routes = [
   {
@@ -25,6 +27,16 @@ const routes = [
     name: 'thanks',
     component: thanks,
   },
+  /*{
+    path: '/login',
+    name: 'Login',
+    component: Login,
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
+  },*/
 ];
 
 const router = createRouter({
