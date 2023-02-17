@@ -1,5 +1,9 @@
 import { next } from '@vercel/edge';
 
+export const config = {
+  matcher: '/',
+};
+
 export const middleware = (request) => {
   const authorizationHeader = req.headers.get('authorization');
 
