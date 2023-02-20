@@ -1,3 +1,8 @@
+<script setup>
+import { useAuthStore } from '../stores/auth';
+const auth = useAuthStore();
+</script>
+
 <template>
   <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
@@ -21,12 +26,28 @@
             >
           </li>
           <li class="nav-item">
+            <router-link class="nav-link" to="/dashboard" v-if="auth.isLoggedIn"
+              >ダッシュボード</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/signup" v-if="!auth.isLoggedIn"
+              >サインアップ</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/signin" v-if="!auth.isLoggedIn"
+              >サインイン</router-link
+            >
+          </li>
+
+          <li class="nav-item">
             <router-link class="nav-link" to="/usertable">一覧</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/form">フォーム</router-link>
           </li>
-          <li class="nav-item dropdown">
+          <!--<li class="nav-item dropdown">
             <router-link
               class="nav-link dropdown-toggle"
               to="#"
@@ -53,16 +74,17 @@
                 >
               </li>
             </ul>
-          </li>
-          <li class="nav-item">
-            <!--<router-link
+          </li>-->
+
+          <!--<li class="nav-item">
+            <router-link
               class="nav-link disabled"
               to="#"
               tabindex="-1"
               aria-disabled="true"
               >Disabled</router-link
-            >-->
-          </li>
+            >
+          </li>-->
         </ul>
       </div>
     </div>

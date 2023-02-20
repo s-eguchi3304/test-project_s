@@ -9,6 +9,7 @@ import ShoppingCart from '../components/ShoppingCart.vue';
     <ul>
       <li><router-link to="/usertable">〇〇一覧</router-link></li>
       <li><router-link to="/form">フォーム</router-link></li>
+      <li><router-link to="/login">サインアップ、サインイン</router-link></li>
     </ul>
 
     <div class="cart">

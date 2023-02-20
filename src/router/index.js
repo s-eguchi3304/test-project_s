@@ -53,6 +53,11 @@ const router = createRouter({
       name: 'dashboard',
       component: () => import('../pages/DashBoard.vue'),
     },
+    {
+      path: '/email_confirmation',
+      name: 'emailConfirmation',
+      component: () => import('../pages/EmailConfirmation.vue'),
+    },
   ],
 });
 

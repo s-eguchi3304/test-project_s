@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { supabase } from '../supabase';
+import { supabase } from '/supabase';
 
 const tasks = ref([]);
 
@@ -11,7 +11,7 @@ const getTasks = async () => {
 
 getTasks();
 
-const signUpUser = async () => {
+/*const signUpUser = async () => {
   const { user, session, error } = await supabase.auth.signUp({
     email: 's-eguchi@point-inc.jp',
     password: 'password',
@@ -21,7 +21,7 @@ const signUpUser = async () => {
   console.log(error);
 };
 
-signUpUser();
+signUpUser();*/
 </script>
 
 <template>
