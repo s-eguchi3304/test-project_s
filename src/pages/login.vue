@@ -1,3 +1,17 @@
+<script setup>
+import { useAuthStore } from '../stores/auth';
+const auth = useAuthStore();
+</script>
 <template>
-  <div></div>
+  <ul>
+    <li v-if="auth.isLoggedIn">
+      <router-link to="/dashboard">Dashboard</router-link>
+    </li>
+    <li v-if="!auth.isLoggedIn">
+      <router-link to="/signup">SignUp</router-link>
+    </li>
+    <li v-if="!auth.isLoggedIn">
+      <router-link to="/signin">SignIn</router-link>
+    </li>
+  </ul>
 </template>

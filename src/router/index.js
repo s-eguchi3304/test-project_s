@@ -3,45 +3,57 @@ import index from '/src/pages/index.vue';
 import UserTable from '/src/pages/UserTable.vue';
 import InputForm from '/src/pages/InputForm.vue';
 import thanks from '/src/pages/thanks.vue';
-/*import Login from '/src/pages/login.vue';
-import Register from '/src/pages/register.vue';*/
-
-const routes = [
-  {
-    path: '/',
-    name: 'index',
-    component: index,
-  },
-  {
-    path: '/usertable',
-    name: 'UserTable',
-    component: UserTable,
-  },
-  {
-    path: '/form',
-    name: 'InputForm',
-    component: InputForm,
-  },
-  {
-    path: '/thanks',
-    name: 'thanks',
-    component: thanks,
-  },
-  /*{
-    path: '/login',
-    name: 'Login',
-    component: Login,
-  },
-  {
-    path: '/register',
-    name: 'Register',
-    component: Register,
-  },*/
-];
+import supabase_test from '/src/pages/todo_supabaseTEST.vue';
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes,
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    {
+      path: '/',
+      name: 'index',
+      component: index,
+    },
+    {
+      path: '/usertable',
+      name: 'UserTable',
+      component: UserTable,
+    },
+    {
+      path: '/form',
+      name: 'InputForm',
+      component: InputForm,
+    },
+    {
+      path: '/thanks',
+      name: 'thanks',
+      component: thanks,
+    },
+    {
+      path: '/supabase_test',
+      name: 'supabase_test',
+      component: supabase_test,
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('../pages/login.vue'),
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: () => import('../pages/SignUp.vue'),
+    },
+    {
+      path: '/signin',
+      name: 'signin',
+      component: () => import('../pages/SingIn.vue'),
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: () => import('../pages/DashBoard.vue'),
+    },
+  ],
 });
 
 export default router;
