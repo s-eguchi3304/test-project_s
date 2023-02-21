@@ -1,10 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { useAuthStore } from '../stores/auth';
 import index from '/src/pages/index.vue';
-import UserTable from '/src/pages/UserTable.vue';
-import InputForm from '/src/pages/InputForm.vue';
-import thanks from '/src/pages/thanks.vue';
-import supabase_test from '/src/pages/todo_supabaseTEST.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,24 +11,34 @@ const router = createRouter({
       component: index,
     },
     {
+      path: '/blog',
+      name: 'Blog',
+      component: () => import('../pages/Blog.vue'),
+    },
+    {
+      path: '/blog/:id',
+      name: 'BlogDtl',
+      component: () => import('../pages/BlogDtl.vue'),
+    },
+    {
       path: '/usertable',
       name: 'UserTable',
-      component: UserTable,
+      component: () => import('../pages/UserTable.vue'),
     },
     {
       path: '/form',
       name: 'InputForm',
-      component: InputForm,
+      component: () => import('../pages/InputForm.vue'),
     },
     {
       path: '/thanks',
       name: 'thanks',
-      component: thanks,
+      component: () => import('../pages/thanks.vue'),
     },
     {
       path: '/supabase_test',
       name: 'supabase_test',
-      component: supabase_test,
+      component: () => import('../pages/todo_supabaseTEST.vue'),
     },
     {
       path: '/login',
