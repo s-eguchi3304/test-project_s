@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { useAuthStore } from '../stores/auth';
 import index from '/src/pages/index.vue';
 import UserTable from '/src/pages/UserTable.vue';
 import InputForm from '/src/pages/InputForm.vue';
@@ -52,6 +53,9 @@ const router = createRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: () => import('../pages/DashBoard.vue'),
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: '/email_confirmation',
@@ -59,6 +63,13 @@ const router = createRouter({
       component: () => import('../pages/EmailConfirmation.vue'),
     },
   ],
+});
+
+router.beforeEach((to) => {
+  const auth = useAuthStore();
+  if (!auth.isLoggedIn && to.meta.requiresAuth) {
+    return { name: 'signin' };
+  }
 });
 
 export default router;
