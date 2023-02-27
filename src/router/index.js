@@ -26,9 +26,22 @@ const router = createRouter({
       component: () => import('../pages/UserTable.vue'),
     },
     {
+      path: '/formindex',
+      name: 'FormIndex',
+      component: () => import('../pages/FormIndex.vue'),
+    },
+    {
       path: '/form',
       name: 'InputForm',
-      component: () => import('../pages/InputForm.vue'),
+      component: () => import('../components/InputForm.vue'),
+    },
+    {
+      path: '/formconfirm',
+      name: 'formConfirm',
+      component: () => import('../components/formConfirm.vue'),
+      meta: {
+        isconfirm: true,
+      },
     },
     {
       path: '/thanks',
@@ -39,6 +52,11 @@ const router = createRouter({
       path: '/supabase_test',
       name: 'supabase_test',
       component: () => import('../pages/todo_supabaseTEST.vue'),
+    },
+    {
+      path: '/chattest',
+      name: 'ChatTest',
+      component: () => import('../pages/chattest.vue'),
     },
     {
       path: '/login',

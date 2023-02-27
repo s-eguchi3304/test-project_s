@@ -5,9 +5,7 @@ import { useRouter } from 'vue-router';
 import { required, email } from '../utils/i18n-validators.js';
 
 const router = useRouter();
-
 const title = ref('テストフォーム');
-
 const formData = reactive({
   text: '',
   textArea: '',
@@ -18,7 +16,6 @@ const formData = reactive({
   tel: '',
   email: '',
 });
-
 const rules = {
   text: { required },
   textArea: { required },
@@ -29,7 +26,6 @@ const rules = {
   tel: { required },
   email: { required, email },
 };
-
 const v$ = useVuelidate(rules, formData);
 
 const submitForm = () => {
@@ -40,7 +36,7 @@ const submitForm = () => {
   } else {
     console.log('バリデーションパス、リクエスト送信');
     console.log('submit', formData);
-    router.replace('/thanks');
+    router.push('/thanks');
   }
 };
 </script>

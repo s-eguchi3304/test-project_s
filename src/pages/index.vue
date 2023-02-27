@@ -1,6 +1,8 @@
 <script setup>
 import ProductList from '../components/ProductList.vue';
 import ShoppingCart from '../components/ShoppingCart.vue';
+import UserTable2 from '../components/UserTable2.vue';
+import noticeList from '../components/noticelist.vue';
 </script>
 
 <template>
@@ -26,7 +28,9 @@ import ShoppingCart from '../components/ShoppingCart.vue';
       </li>
     </ul>
 
-    <div class="cart">
+    <noticeList />
+
+    <div class="mt-5">
       <h2>pinia入門(カート)</h2>
       <hr />
       <h2>商品一覧</h2>
@@ -34,13 +38,9 @@ import ShoppingCart from '../components/ShoppingCart.vue';
       <hr />
       <ShoppingCart />
     </div>
+    <div class="mt-5">
+      <h2>並び替えテーブル</h2>
+      <UserTable2 />
+    </div>
   </div>
 </template>
-
-<style>
-.cart {
-  font-family: Avenir, Helvetica, Ariel, sans-serif;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
