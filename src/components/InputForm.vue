@@ -3,6 +3,7 @@ import { ref, reactive } from 'vue';
 import { useVuelidate } from '@vuelidate/core';
 import { useRouter } from 'vue-router';
 import { required, email } from '../utils/i18n-validators.js';
+import { supabase } from '/supabase';
 
 const router = useRouter();
 const title = ref('テストフォーム');
@@ -16,6 +17,7 @@ const formData = reactive({
   tel: '',
   email: '',
 });
+
 const rules = {
   text: { required },
   textArea: { required },
@@ -34,8 +36,22 @@ const submitForm = () => {
     console.log('バリデーションエラー発生');
     console.log('$errors', v$.value.$errors);
   } else {
-    console.log('バリデーションパス、リクエスト送信');
-    console.log('submit', formData);
+    /*console.log('バリデーションパス、リクエスト送信');
+    console.log('submit', formData);*/
+
+    const sendData = async () => {
+      await supabase.from('inputtest').insert({
+        text: formData.text,
+        textArea: formData.textArea,
+        check: formData.check,
+        radio: formData.radio,
+        select: formData.select,
+        selects: formData.selects,
+        tel: formData.tel,
+        email: formData.email,
+      });
+    };
+    sendData();
     router.push('/thanks');
   }
 };
