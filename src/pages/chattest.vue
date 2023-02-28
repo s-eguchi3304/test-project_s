@@ -17,38 +17,42 @@ const sendMessage = async () => {
 };
 
 const getMessages = async () => {
-  let { data: message } = await supabase
+  let { data, error } = await supabase
     .from('message')
     .select('*')
     .limit(MAX_MESSAGE_COUNT)
     .order('created_at', { ascending: false });
-  messages.value = message;
+  messages.value = data;
 };
 
-/*const subscribeMessage = () => {
+const subscribeMessage = () => {
   supabase
-    .from('message')
-    .on('INSERT', ({ new: newMessage }) => {
-      messages.value = [newMessage, ...messages.value].slice(
-        0,
-        MAX_MESSAGE_COUNT
-      );
-    })
+    .channel('*')
+    .on(
+      'postgres_changes',
+      { event: 'INSERT', schema: 'public', table: 'message' },
+      ({ new: newMessage }) => {
+        messages.value = [newMessage, ...messages.value].slice(
+          0,
+          MAX_MESSAGE_COUNT
+        );
+      }
+    )
     .subscribe();
 };
 
 const unsubscribeMessage = () => {
-  supabase.removeAllsubscriptions();
-};*/
+  supabase.removeAllChannels();
+};
 
 onMounted(() => {
   getMessages();
-  /*subscribeMessage();*/
+  subscribeMessage();
 });
 
-/*onBeforeUnmount(() => {
+onBeforeUnmount(() => {
   unsubscribeMessage();
-});*/
+});
 </script>
 
 <template>
@@ -60,8 +64,7 @@ onMounted(() => {
 
   <ul>
     <li v-for="message in messages" :key="message.id">
-      <b>{{ message.name }}</b
-      >{{ message.message }}
+      <b>{{ message.name }}</b> {{ message.message }}
     </li>
   </ul>
 </template>
