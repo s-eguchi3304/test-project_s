@@ -4,7 +4,7 @@ export const config = {
   matcher: '/',
 };
 
-export function middleware(request) {
+export default function middleware(request) {
   const authorizationHeader = request.headers.get('authorization');
 
   if (authorizationHeader) {
