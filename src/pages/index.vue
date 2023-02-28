@@ -11,11 +11,13 @@ import noticeList from '../components/noticelist.vue';
     <p>テスト画面一覧</p>
     <ul>
       <li>
-        <router-link to="/usertable">テスト一覧(JSONデータ取得)</router-link>
+        <router-link to="/usertable"
+          >テストユーザー一覧(JSONデータ取得)</router-link
+        >
       </li>
       <li>
         <router-link to="/form"
-          >フォーム(形、動作確認のみ、送信処理未作成)</router-link
+          >フォーム(動作確認用、送信先supabase)</router-link
         >
       </li>
       <li>
@@ -25,6 +27,9 @@ import noticeList from '../components/noticelist.vue';
       </li>
       <li>
         <router-link to="/blog">テスト記事一覧(JSONデータ取得)</router-link>
+      </li>
+      <li>
+        <router-link to="/chattest">テスト簡易チャット</router-link>
       </li>
     </ul>
 
