@@ -4,7 +4,7 @@ export const config = {
   matcher: '/',
 };
 
-export const middleware = (request) => {
+export function middleware(request) {
   const authorizationHeader = request.headers.get('authorization');
 
   if (authorizationHeader) {
@@ -25,4 +25,4 @@ export const middleware = (request) => {
       'WWW-Authenticate': 'Basic realm="Secure Area"',
     },
   });
-};
+}
