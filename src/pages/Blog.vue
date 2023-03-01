@@ -47,8 +47,8 @@ onMounted(() => {
               <p class="card-text">{{ post.body }}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <router-link :to="`/blog/${post.id}`" class="btn btn-primary"
-                  >見る</router-link
-                >
+                  >見る
+                </router-link>
                 <!--<div class="btn-group">
                     <button type="button" class="btn btn-sm btn-outline-secondary">見る</button>
                     <button type="button" class="btn btn-sm btn-outline-secondary">編集</button>
