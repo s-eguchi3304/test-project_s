@@ -16,6 +16,7 @@ const formData = reactive({
   selects: [],
   tel: '',
   email: '',
+  file: '',
 });
 
 const rules = {
@@ -27,7 +28,14 @@ const rules = {
   selects: { required },
   tel: { required },
   email: { required, email },
+  file: { required },
 };
+
+const handleFile = (event) => {
+  const file = event.target.files[0];
+  formData.file = file;
+};
+
 const v$ = useVuelidate(rules, formData);
 
 const submitForm = () => {
@@ -36,8 +44,8 @@ const submitForm = () => {
     console.log('バリデーションエラー発生');
     console.log('$errors', v$.value.$errors);
   } else {
-    /*console.log('バリデーションパス、リクエスト送信');
-    console.log('submit', formData);*/
+    /*console.log('バリデーションパス、リクエスト送信');*/
+    console.log('submit', formData);
 
     const sendData = async () => {
       await supabase.from('inputtest').insert({
@@ -236,6 +244,19 @@ const submitForm = () => {
                   :class="{ error: v$.email.$error, 'form-control': true }"
                 />
                 <div v-for="error of v$.email.$errors" :key="error.$uid">
+                  <div class="text-danger fw-bold">{{ error.$message }}</div>
+                </div>
+              </div>
+
+              <div class="form-group mb-3">
+                <label>ファイルアップロード</label>
+                <input
+                  type="file"
+                  id="file"
+                  v-on:change="handleFile"
+                  :class="{ error: v$.file.$error, 'form-control': true }"
+                />
+                <div v-for="error of v$.file.$errors" :key="error.$uid">
                   <div class="text-danger fw-bold">{{ error.$message }}</div>
                 </div>
               </div>
